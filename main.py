@@ -42,14 +42,15 @@ def output_path() -> str:
 
 
 def main() -> None:
-    line = LINE
-    if not 1 <= len(line) <= 200 or not line.strip():
+    if not 1 <= len(LINE) <= 200 or not LINE.strip():
         raise SystemExit("entry must be 1 to 200 characters of text")
     path = output_path()
-    os.makedirs(os.path.dirname(path), exist_ok=True)
+    parent = os.path.dirname(path)
+    if parent:
+        os.makedirs(parent, exist_ok=True)
     with open(path, "w", encoding="utf-8", newline="") as handle:
-        handle.write(line)
-    print(line)
+        handle.write(LINE)
+    print(LINE)
 
 
 if __name__ == "__main__":
